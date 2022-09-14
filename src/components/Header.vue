@@ -2,7 +2,12 @@
   <header>
     <!-- <h1>Tasks Tracker</h1> -->
     <h1>{{ title }}</h1>
-    <Button text="Add Task" color="blue" />
+    <Button
+      v-show="homePage"
+      @btn-click="$emit('toggle-add-task')"
+      :text="showAddTask ? 'Close' : 'Add Task'"
+      :color="showAddTask ? 'red' : 'blue'"
+    />
   </header>
 </template>
 
@@ -18,9 +23,19 @@ export default {
     //   type: String,
     //   default: 'Hello World',
     // },
+    showAddTask: Boolean,
   },
   components: {
     Button,
+  },
+  computed: {
+    homePage() {
+      if (this.$route.path === '/') {
+        return true
+      } else {
+        return false
+      }
+    },
   },
 }
 </script>
